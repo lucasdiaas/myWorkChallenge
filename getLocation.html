@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>
+
+            var options = {
+            enableHighAccuracy: true,
+            timeout: 7000,
+            maximumAge: 0
+            };
+
+            function success(pos) {
+                var lat = pos.coords.latitude;
+                var long = pos.coords.longitude;
+                compareDist(lat, long);
+            };
+
+            function error(err) {
+                console.warn('ERROR(' + err.code + '): ' + err.message);
+            };
+
+            function degreesToRadians(degrees) {
+            return degrees * Math.PI / 180;
+            }
+
+            function compareDist(lat, long){
+
+                var geofences = '[{"id": 9, "desc": "Company", "latitude": "-23.456776", "longitude": "-46.454567", "radius": "120.00"}, {"id": 10, "desc": "Company Office 2", "latitude": "-30.456776", "longitude": "-50.454567", "radius": "90.00"}]';
+
+                obj = JSON.parse(geofences);
+
+                for(var x in obj){
+                    dist = distanceInKM(lat, long, parseFloat(obj[x].latitude), parseFloat(obj[x].longitude));
+                    dist = dist*1000;
+
+                    if(dist < obj[x].radius){
+                        console.log((dist).toFixed(2) + ' metros');
+                        console.log('Acesso autorizado');
+                        document.getElementById("botao").disabled = false;
+                    }
+                    else{
+                        console.log((dist).toFixed(2) + ' metros');
+                        console.log('Acesso negado para o geofence '+ obj[x].desc);
+                    }
+                }
+
+            }
+
+            function distanceInKM(lat1, lon1, lat2, lon2) {
+                var earthRadiusKm = 6371;
+
+                var dLat = degreesToRadians(lat2-lat1);
+                var dLon = degreesToRadians(lon2-lon1);
+
+                lat1 = degreesToRadians(lat1);
+                lat2 = degreesToRadians(lat2);
+
+                var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
+                var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+                return earthRadiusKm * c;
+            }
+
+            navigator.geolocation.getCurrentPosition(success, error, options);
+
+        </script>
+    </head>
+    <body>
+        <h1>TIME TRACK</h1>
+        <button type="submit" id="botao" disabled="true">SAVE</button>
+    </body>
+</html>
