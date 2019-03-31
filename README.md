@@ -5,6 +5,8 @@ It contains a Django made API 'timetracking' to manage de geofences and timetrac
 
 To run this you'll need Python 3.7.2 and Django 2.1.7 
 
+It also contains a HTML file with a script to get the user's current postion and compare it with a geofences.json file, it calculates the users distance from the geofences, and compare if it is inside the geofence radius, if it is true the script change the button status from 'disabled' to 'enable'
+
 Just clone this repository, and run 'python manage.py runserver' from inside the 'timetracking' folder.
 
 In this API you have the following methods:
