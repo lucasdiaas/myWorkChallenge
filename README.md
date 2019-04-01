@@ -14,6 +14,7 @@ In this API you have the following methods:
 For the GEOFENCES
 
 Geofences have the following structure:
+```json
 {
 "id": <integer>,
 "desc": <string>,
@@ -21,6 +22,7 @@ Geofences have the following structure:
 "longitude": <decimal>,
 "radius": <decimal>
 }
+```
 
 GET
 
