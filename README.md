@@ -36,12 +36,14 @@ POST
 
 localhost:8000/geofences/new/
 -To send a POST request to insert a new geofence record on the database. For this use the following format to your JSON:
+```json
 {
   "desc": "Description",
   "latitude": "11.223344",
   "longitude": "-22.334455",         
   "radius": "120.00"
 }
+```
 
 The parameters "latitude", "longitude" and "radius" must be decimal numbers, and for radius use the distance in meters.
 
@@ -54,12 +56,14 @@ localhost:8000/geofences/delete/<int:id>
 For the TIMETRACKS
 
 TimeTracks have the following structure:
+```json
 {
 "id": <int>,
 "latitude": <decimal>,
 "longitude": <decimal>,
 "date": <datetime>
 }
+```
 
 GET
 
@@ -71,9 +75,11 @@ POST
 localhost:8000/timetrack/new
 -To send a POST request to add a new timetrack on the database. For this method use a JSON with the following format.
 
+```json
 {
 "latitude": "-23.000000",
 "longitude": "-50.000000",
 }
+```
 
 The timetracks cannot be deleted as requested on the Challenge description
